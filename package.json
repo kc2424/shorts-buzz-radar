@@ -1,0 +1,39 @@
+{
+  "name": "buzz-style",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "preview": "opennextjs-cloudflare build && wrangler dev",
+    "deploy": "opennextjs-cloudflare build && wrangler deploy",
+    "deploy:poll": "wrangler deploy -c wrangler.poll.toml",
+    "db:migrate:local": "wrangler d1 migrations apply buzz-style --local",
+    "db:migrate:remote": "wrangler d1 migrations apply buzz-style --remote",
+    "db:seed:generate": "npx tsx scripts/generate-seed.ts",
+    "db:seed:local": "npm run db:seed:generate && wrangler d1 execute buzz-style --local --file=scripts/seed.sql",
+    "poll:dev": "wrangler dev -c wrangler.poll.toml",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+  },
+  "dependencies": {
+    "@opennextjs/cloudflare": "^1.6.5",
+    "next": "^15.5.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260815.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.5.0",
+    "postcss": "^8.5.0",
+    "tailwindcss": "^3.4.0",
+    "tsx": "^4.20.4",
+    "typescript": "^5.8.0",
+    "wrangler": "^4.86.0"
+  }
+}

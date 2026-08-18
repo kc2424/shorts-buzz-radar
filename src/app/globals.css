@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #3ba6f1;
+  --accent-ink: #2c82c9;
+  --accent-wash: #c1e1f7;
+  --canvas: #fafaf9;
+  --surface: #ffffff;
+  --ink: #0c0a09;
+  --ink-soft: #57534e;
+  --ink-faint: #a8a29e;
+  --line: #e8e6e5;
+  --line-strong: #d6d3d1;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --font-jp: -apple-system, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+    "BIZ UDPGothic", "Yu Gothic UI", "Meiryo", "Segoe UI", sans-serif;
+  --font-en: var(--font-inter), -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas font-jp text-ink-soft antialiased;
+    font-size: 14.5px;
+    line-height: 1.85;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply text-ink;
+  }
+}
+
+@layer components {
+  .container-main {
+    @apply mx-auto w-full max-w-container px-5 sm:px-6;
+  }
+
+  .eyebrow {
+    @apply font-en text-[11px] font-semibold uppercase tracking-[0.08em] text-ink-faint;
+  }
+
+  .btn-pill {
+    @apply inline-flex items-center justify-center rounded-full border px-5 py-2 text-sm font-medium transition-colors;
+  }
+
+  .btn-pill-outline {
+    @apply btn-pill border-line text-ink-soft hover:border-accent-ink hover:text-accent-ink;
+  }
+
+  .btn-pill-active {
+    @apply btn-pill border-accent bg-accent text-white;
+  }
+
+  .btn-pill-primary {
+    @apply btn-pill border-accent bg-accent text-white hover:bg-accent-ink;
+  }
+
+  .highlight-pill {
+    @apply inline-block rounded-sm bg-accent-wash px-2.5 pb-1 pt-0.5 text-accent-ink;
+  }
+
+  .stat-value {
+    @apply font-en text-[25px] font-semibold tabular-nums tracking-tight text-ink;
+  }
+
+  .stat-value-accent {
+    @apply stat-value text-accent;
+  }
+
+  .section-divider {
+    @apply border-t border-line-strong;
+  }
+
+  .row-divider {
+    @apply border-b border-line;
+  }
+
+  .accent-border-left {
+    @apply border-l-2 border-accent pl-4;
+  }
+
+  .thumb-border {
+    @apply overflow-hidden rounded-md border border-line bg-surface;
+  }
+}
