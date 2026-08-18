@@ -1,0 +1,9 @@
+{
+  "/api/katas/route": "/api/katas",
+  "/_not-found/page": "/_not-found",
+  "/api/cron/poll/route": "/api/cron/poll",
+  "/api/thumbnails/[...key]/route": "/api/thumbnails/[...key]",
+  "/page": "/",
+  "/about/page": "/about",
+  "/kata/[slug]/page": "/kata/[slug]"
+}

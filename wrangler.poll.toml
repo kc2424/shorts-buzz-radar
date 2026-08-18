@@ -6,11 +6,8 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "DB"
 database_name = "buzz-style"
+database_id = "91e4f13a-6caf-4d96-b31e-4faf9ff13caf"
 migrations_dir = "migrations"
-
-[[r2_buckets]]
-binding = "THUMBNAILS"
-bucket_name = "buzz-style-thumbnails"
 
 [triggers]
 crons = ["0 * * * *"]

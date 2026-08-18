@@ -35,11 +35,13 @@ export async function runPollForPeriod(
     const videos = await fetchTrendingShorts(env.YOUTUBE_API_KEY, period, 50);
 
     for (const video of videos) {
-      const r2Key = await cacheThumbnailToR2(
-        env.THUMBNAILS,
-        video.id,
-        video.thumbnailUrl,
-      );
+      const r2Key = env.THUMBNAILS
+        ? await cacheThumbnailToR2(
+            env.THUMBNAILS,
+            video.id,
+            video.thumbnailUrl,
+          )
+        : null;
 
       await upsertVideo(env, {
         id: video.id,

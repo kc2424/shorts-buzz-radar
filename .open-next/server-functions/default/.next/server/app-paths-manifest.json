@@ -1,0 +1,9 @@
+{
+  "/api/katas/route": "app/api/katas/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/cron/poll/route": "app/api/cron/poll/route.js",
+  "/api/thumbnails/[...key]/route": "app/api/thumbnails/[...key]/route.js",
+  "/page": "app/page.js",
+  "/about/page": "app/about/page.js",
+  "/kata/[slug]/page": "app/kata/[slug]/page.js"
+}

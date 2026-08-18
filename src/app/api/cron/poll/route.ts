@@ -8,9 +8,9 @@ import {
 export async function POST(request: Request) {
   const env = await getAppEnv();
 
-  if (!env?.DB || !env.THUMBNAILS) {
+  if (!env?.DB) {
     return NextResponse.json(
-      { error: "Cloudflare bindings (DB, THUMBNAILS) are not available" },
+      { error: "Cloudflare DB binding is not available" },
       { status: 503 },
     );
   }
