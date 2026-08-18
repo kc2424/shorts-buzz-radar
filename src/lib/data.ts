@@ -14,8 +14,26 @@ import {
   periodMeta as mockPeriodMeta,
 } from "@/lib/mock-data";
 import { isValidPeriod, withDb } from "@/lib/runtime";
+import { enrichSample } from "@/lib/youtube";
 
 export { formatNumber, formatViews };
+
+function enrichKata(kata: Kata): Kata {
+  return {
+    ...kata,
+    samples: kata.samples.map((sample, index) =>
+      enrichSample({
+        id: sample.id,
+        title: sample.title,
+        thumbnailUrl: sample.thumbnailUrl,
+        views: sample.views,
+        channelName: sample.channelName,
+        seed: kata.rank,
+        offset: index,
+      }),
+    ),
+  };
+}
 
 export function parsePeriod(value: string | undefined): Period {
   return isValidPeriod(value) ? value : "week";
@@ -24,10 +42,10 @@ export function parsePeriod(value: string | undefined): Period {
 export async function getKatas(period: Period = "week"): Promise<Kata[]> {
   const rows = await withDb((db) => getKatasByPeriod(db, period));
   if (rows && rows.length > 0) {
-    return rows;
+    return rows.map(enrichKata);
   }
 
-  return mockKatas;
+  return mockKatas.map(enrichKata);
 }
 
 export async function getKataBySlug(
@@ -36,10 +54,11 @@ export async function getKataBySlug(
 ): Promise<Kata | undefined> {
   const row = await withDb((db) => getKataBySlugAndPeriod(db, slug, period));
   if (row) {
-    return row;
+    return enrichKata(row);
   }
 
-  return getMockKataBySlug(slug);
+  const mock = getMockKataBySlug(slug);
+  return mock ? enrichKata(mock) : undefined;
 }
 
 export async function getRelatedKatas(
@@ -55,7 +74,7 @@ export async function getRelatedKatas(
     return fromDb;
   }
 
-  return getMockRelatedKatas(slugs);
+  return getMockRelatedKatas(slugs).map(enrichKata);
 }
 
 export async function getPeriodMetaFor(period: Period): Promise<PeriodMeta> {

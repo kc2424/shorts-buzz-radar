@@ -1,5 +1,6 @@
 import type { KataStats } from "@/lib/types";
 import { formatNumber } from "@/lib/data";
+import { CountUp } from "./motion/Motion";
 
 interface StatsBarProps {
   stats: KataStats;
@@ -23,12 +24,13 @@ export function StatsBar({ stats, compact = false }: StatsBarProps) {
         compact ? "gap-6 py-3" : "gap-8 py-5 sm:gap-12"
       }`}
     >
-      {items.map(({ label, value, accent }) => (
-        <div key={label}>
+      {items.map(({ label, value, accent }, index) => (
+        <div key={label} className="animate-slide-in" style={{ animationDelay: `${index * 80}ms` }}>
           <p className="eyebrow mb-1">{label}</p>
-          <p className={accent ? "stat-value-accent" : "stat-value"}>
-            {value}
-          </p>
+          <CountUp
+            value={value}
+            className={accent ? "stat-value-accent" : "stat-value"}
+          />
         </div>
       ))}
     </div>

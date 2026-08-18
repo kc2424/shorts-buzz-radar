@@ -12,6 +12,7 @@ export interface KataSample {
   thumbnailUrl: string;
   views: number;
   channelName: string;
+  shortsUrl: string;
 }
 
 export interface GenreBreakdown {

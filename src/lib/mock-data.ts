@@ -1,22 +1,20 @@
 import type { Kata, PeriodMeta } from "./types";
-
-const sampleThumbs = [
-  "https://picsum.photos/seed/buzz1/400/711",
-  "https://picsum.photos/seed/buzz2/400/711",
-  "https://picsum.photos/seed/buzz3/400/711",
-  "https://picsum.photos/seed/buzz4/400/711",
-  "https://picsum.photos/seed/buzz5/400/711",
-  "https://picsum.photos/seed/buzz6/400/711",
-];
+import { enrichSample } from "./youtube";
+import { videoFromPool } from "./sample-videos";
 
 function makeSamples(seed: number, count: number) {
-  return Array.from({ length: count }, (_, i) => ({
-    id: `sample-${seed}-${i}`,
-    title: `サンプル動画 ${i + 1}`,
-    thumbnailUrl: sampleThumbs[(seed + i) % sampleThumbs.length],
-    views: 120_000 + seed * 10_000 + i * 8_500,
-    channelName: `チャンネル${String.fromCharCode(65 + i)}`,
-  }));
+  return Array.from({ length: count }, (_, i) => {
+    const video = videoFromPool(seed, i);
+    return enrichSample({
+      id: video.id,
+      title: video.title,
+      thumbnailUrl: "",
+      views: video.views,
+      channelName: video.channelName,
+      seed,
+      offset: i,
+    });
+  });
 }
 
 export const periodMeta: Record<string, PeriodMeta> = {

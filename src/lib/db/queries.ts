@@ -51,6 +51,7 @@ function mapKataRow(
       ),
       views: sample.view_count,
       channelName: sample.channel_name,
+      shortsUrl: "",
     })),
     genreBreakdown: parseJsonArray(row.genre_breakdown_json),
     relatedSlugs: parseJsonArray<string>(row.related_slugs_json),

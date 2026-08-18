@@ -8,7 +8,7 @@ import {
 } from "@/lib/data";
 import { StatsBar } from "@/components/StatsBar";
 import { TagList } from "@/components/TagList";
-import { ThumbnailGrid } from "@/components/ThumbnailGrid";
+import { SampleVideoGrid } from "@/components/SampleVideoGrid";
 import { Sidebar } from "@/components/Sidebar";
 import { ShareButton } from "@/components/ShareButton";
 
@@ -102,7 +102,10 @@ export default async function KataDetailPage({ params, searchParams }: PageProps
 
           <section className="mt-10">
             <h2 className="eyebrow mb-4">サンプル動画</h2>
-            <ThumbnailGrid samples={kata.samples} variant="grid" />
+            <p className="mb-4 text-sm text-ink-soft">
+              サムネをクリックすると Shorts をその場でプレビューできます。
+            </p>
+            <SampleVideoGrid samples={kata.samples} variant="grid" />
           </section>
         </article>
 
